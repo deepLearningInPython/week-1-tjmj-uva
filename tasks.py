@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 
 # Follow the tasks below to practice basic Python concepts.
 # Write your code in between the dashed lines.
@@ -13,7 +13,14 @@ import numpy
 # Your code here:
 # -----------------------------------------------
 
-def step
+def step(num):
+    if num > 0:
+        return(1)
+    else:
+        return(-1)
+    
+step(5)
+step(-5)
 
 
 # -----------------------------------------------
@@ -28,9 +35,19 @@ def step
 
 # Your code here:
 # -----------------------------------------------
-def ReLu
+def ReLu(array, cutoff = 0):
+    array = np.array(array)
+    return np.maximum(array, cutoff)
 
+array = np.array([-5, 0, 3, -2, 4])
 
+ReLu(array)
+
+array = np.array([-5, 0, 3, -2, 4])
+ReLu(array, 2)
+
+array = np.array([])
+ReLu(array)
 # -----------------------------------------------
 
 
@@ -44,7 +61,31 @@ def ReLu
 # Your code here:
 # -----------------------------------------------
 
-def neural_net_layer
+def neural_net_layer(matrix, vector, cutoff = 0):
+    if np.ndim(matrix) != 2 or np.ndim(vector) != 1:
+        return("Error: matrix must have 2 dimensions. Vector must have 1 dimension")
+    if np.shape(matrix[1]) != np.shape(vector):
+        return("Error: matrix and vector shapes not compatible")
+    matrix = np.asarray(matrix)
+    vector = np.asarray(vector)
+    new_matrix = matrix @ vector
+    return ReLu(new_matrix, cutoff)
+
+
+inputs = np.array([[1, 2], [3, 4]])
+weights = np.array([1, -1])
+
+neural_net_layer(inputs, weights)
+
+inputs = np.array([[2, 3], [1, 1]])
+weights = np.array([1, 2])
+
+neural_net_layer(inputs, weights)
+
+inputs = np.array([[1, -1], [-2, 3]])
+weights = np.array([-2, 1])
+
+neural_net_layer(inputs, weights)
 
 
 # ------------------------------------------
